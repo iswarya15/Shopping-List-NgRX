@@ -89,4 +89,4 @@ export function shoppingListReducer(
   }
 }
 
-// There is another bug created for the same issue that the workflow history table is not updating after Re-route. Once that bug is fixed, this issue will be resolved
+

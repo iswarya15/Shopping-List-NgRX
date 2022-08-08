@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Ngrx - Flow
 
-![NgRX Flow](https://github.com/iswarya15/NgRX-Starter/src/assets/ngrx-flow.png)
+![NgRX Flow](https://github.com/iswarya15/Shopping-List-NgRX/blob/main/src/assets/ngrx-flow.png)
 
 ### Reducer
 
