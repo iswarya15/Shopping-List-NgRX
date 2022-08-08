@@ -16,24 +16,19 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="btn-group" appDropdown>
-      <button type="button" class="btn btn-primary dropdown-toggle">
-        Manage Recipe <span class="caret"></span>
+      <button (click)="onEditRecipe()" type="button" class="btn btn-primary">
+        Edit Recipe
       </button>
-      <ul class="dropdown-menu">
-        <li>
-          <a (click)="onAddToShoppingList()" style="cursor: pointer"
-            >Add to Shopping List</a
-          >
-        </li>
-        <li>
-          <a style="cursor: pointer" (click)="onEditRecipe()">Edit Recipe</a>
-        </li>
-        <li>
-          <a style="cursor: pointer" (click)="onDeleteRecipe()"
-            >Delete Recipe</a
-          >
-        </li>
-      </ul>
+      <button (click)="onDeleteRecipe()" type="button" class="btn btn-primary">
+        Delete Recipe
+      </button>
+      <button
+        (click)="onAddToShoppingList()"
+        type="button"
+        class="btn btn-primary"
+      >
+        Add to Shopping List
+      </button>
     </div>
   </div>
 </div>

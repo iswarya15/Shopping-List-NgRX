@@ -12,6 +12,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 `Reducer` takes 2 arguments - **Current State**, **Action**
 
+(state = initialState) is the Default State for the Reducer
+
+`NgRX` automatically passes _current State, action Invoked to the Reducer_. Reducer only has `synchronous` code.
+
 ### Reducer Syntax
 
 ```
@@ -113,3 +117,41 @@ this.store.dispatch(new ShoppingListActions.AddIngredient(ingredient));
 Action Dispatched -> Store finds appropriate reducer which has the dispatched action defined -> Reducer modifies current state based on Action payload -> Reducer returns new State.
 
 ### Group Actions
+
+```
+export type groupActions = AddIngredients | UpdateIngredients | DeleteIngredients;
+```
+
+## Expanding the state - AppState Interface
+
+- When our `app state` grows, we might have more than one `reducer` in our `state`. Whenever the `AppState` is modified, we _need to modify the `store definition`_ throughout the `components` where we have `Injected` the Store service. This process is clumsy.
+
+- Hence we export an `Interface`, which describes how _State looks like_ for this `Reducer`. Below is the **Interface for state of ShoppingListReducer**.
+
+```
+export interface State {
+  ingredients: Ingredient[];
+  editedIngredient: Ingredient;
+  editedIngredientIndex: number;
+}
+
+const initialState: State = {
+  ingredients: [new Ingredient('Apples', 5), new Ingredient('Tomatoes', 10)],
+  editedIngredient: null,
+  editedIngredientIndex: -1,
+};
+```
+
+- We can also create an `Interface` for the `AppState` - in future, we might have more than one `Reducer`.
+
+```
+export interface AppState {
+   shoppingList: State
+}
+```
+
+`shopping-list.component.ts`
+
+```
+private store: Store<fromShoppingList.AppState>
+```
