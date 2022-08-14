@@ -13,10 +13,7 @@ const initialState: State = {
   editedIngredientIndex: -1,
 };
 
-export function shoppingListReducer(
-  state: State = initialState,
-  action: ShoppingListActions.groupShoppingActions
-) {
+export function shoppingListReducer(state: State = initialState, action: ShoppingListActions.groupShoppingActions) {
   console.log('ShoppingList Action => ', action.type);
   console.log('ShoppingList Reducer: Action Payload => ', action.payload);
   console.log('Current State => ', state);
@@ -60,9 +57,7 @@ export function shoppingListReducer(
 
     case ShoppingListActions.DELETE_INGREDIENT:
       const currentIngredients = state.ingredients;
-      const filteredIngredients = currentIngredients.filter(
-        (ingredient, index) => index !== state.editedIngredientIndex
-      );
+      const filteredIngredients = currentIngredients.filter((ingredient, index) => index !== state.editedIngredientIndex);
 
       console.log('Modified State => ', filteredIngredients);
       return {
@@ -88,5 +83,3 @@ export function shoppingListReducer(
       return state;
   }
 }
-
-

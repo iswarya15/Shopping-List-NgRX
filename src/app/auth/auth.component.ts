@@ -1,20 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-  Component,
-  ComponentFactoryResolver,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { PlaceholderDirective } from '../shared/placeholder/placeholder.directive';
-import {
-  SignUpResponseData,
-  AuthService,
-  LoginResponseData,
-} from './auth.service';
+import { SignUpResponseData, AuthService, LoginResponseData } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -30,11 +21,7 @@ export class AuthComponent implements OnDestroy {
 
   private closeSubscription: Subscription;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private componentFactoryResolver: ComponentFactoryResolver
-  ) {}
+  constructor(private authService: AuthService, private router: Router, private componentFactoryResolver: ComponentFactoryResolver) {}
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -48,9 +35,7 @@ export class AuthComponent implements OnDestroy {
     const email = this.authForm.value.email;
     const password = this.authForm.value.password;
 
-    let authObservable:
-      | Observable<LoginResponseData | HttpErrorResponse>
-      | Observable<SignUpResponseData | HttpErrorResponse>;
+    let authObservable: Observable<LoginResponseData | HttpErrorResponse> | Observable<SignUpResponseData | HttpErrorResponse>;
 
     this.isLoading = true;
     if (this.isLoginMode) {
@@ -89,14 +74,11 @@ export class AuthComponent implements OnDestroy {
   }
 
   private showErrorAlert(message: string) {
-    const alertComponentFactory =
-      this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+    const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
     const hostViewContainerRef = this.alertHost.viewContainerRef;
     hostViewContainerRef.clear(); // clears all components rendered before in this place
 
-    const alertComponentRef = hostViewContainerRef.createComponent(
-      alertComponentFactory
-    );
+    const alertComponentRef = hostViewContainerRef.createComponent(alertComponentFactory);
     alertComponentRef.instance.message = message;
     this.closeSubscription = alertComponentRef.instance.close.subscribe(() => {
       this.closeSubscription.unsubscribe();

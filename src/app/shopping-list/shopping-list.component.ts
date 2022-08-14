@@ -13,12 +13,10 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: any;
   //   private ingredientsChangedSubscription: Subscription;
 
-  constructor(
-    private loggingService: LoggingService,
-    private store: Store<fromApp.AppState>
-  ) {}
+  constructor(private loggingService: LoggingService, private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
+    console.log('shopping list store => ', this.store);
     this.ingredients = this.store.select('shoppingList');
     console.log('Shopping List Ingredients =>', this.ingredients);
 
