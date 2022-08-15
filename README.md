@@ -64,6 +64,8 @@ export class AddIngredient implements Action {
 - readonly => TS feature. Errors when tried to modify
 - payload => Data that is passed to Reducer
 
+Note on Actions: _Any action that we dispatch reaches all `reducers`_.
+
 ## Store Module
 
 `StoreModule.forRoot()` takes in a `Action-ReducerMap` which is a JS Object.
@@ -154,4 +156,42 @@ export interface AppState {
 
 ```
 private store: Store<fromShoppingList.AppState>
+```
+
+## Effects
+
+Often times, we **need to perform some logic** after _an action has been dispatched_, and the _store has been updated_. **Because reducers should be side-effect free, we need a way to handle these side-effects.**
+
+`@ngrx` offers a library called `@ngrx/effects` to solve these problems.
+
+`Effects` is just a **class** where we inject actions just like `reducer`.
+
+```
+export class AuthEffects{
+   constructor(private actions$: Actions){}
+}
+```
+
+`actions$` is an `Observable` which _emits the action_ that is currently dispatched.
+
+Note: We **don't need to subscribe** to the `actions$`. NgRX does it itself.
+
+### ofType of ngrx/effects
+
+Use `ofType` operator provided by `ngrx/effects` to _filter the type of Action_ we need to apply this effect for.
+
+```
+@Effect()
+authLogin = this.actions$.pipe(ofType(fromAuthActions.LOGIN_START));
+```
+
+### Effect returns Action
+
+Once we are done with the code in the `effect`, we should dispatch an `action`.
+
+### Use @Injectable decorator to make use of the Effect
+
+```
+@Injectable()
+export class AuthEffects {}
 ```
